@@ -1,0 +1,181 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * PulmoScope design system — "Backlit frost viewer".
+ * Dark radiology reading-room palette. All colors are oklch tokens.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-ink: var(--ink);
+  --color-panel: var(--panel);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-ice: var(--ice);
+  --color-frost: var(--frost);
+  --color-dim: var(--dim);
+  --color-warn: var(--warn);
+  --color-alert: var(--alert);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --radius: 0.625rem;
+
+  --ink: oklch(0.185 0.024 250);
+  --panel: oklch(0.225 0.028 252);
+  --line: oklch(0.315 0.032 252);
+  --accent: oklch(0.78 0.148 163);
+  --ice: oklch(0.745 0.068 236);
+  --frost: oklch(0.953 0.012 233);
+  --dim: oklch(0.585 0.036 240);
+  --warn: oklch(0.78 0.16 70);
+  --alert: oklch(0.65 0.22 18);
+
+  --background: var(--ink);
+  --foreground: var(--frost);
+  --card: var(--panel);
+  --card-foreground: var(--frost);
+  --popover: var(--panel);
+  --popover-foreground: var(--frost);
+  --primary: var(--accent);
+  --primary-foreground: var(--ink);
+  --secondary: oklch(0.27 0.03 252);
+  --secondary-foreground: var(--frost);
+  --muted: oklch(0.27 0.03 252);
+  --muted-foreground: var(--dim);
+  --accent-foreground: var(--ink);
+  --destructive: var(--alert);
+  --destructive-foreground: var(--frost);
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--accent);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-frost);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--accent) 30%, transparent);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(1000%);
+  }
+}
+
+@keyframes camfade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes meterfill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@utility rise-in {
+  animation: rise 500ms cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+@utility scan-sweep {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -2.5rem;
+  height: 2.5rem;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    color-mix(in oklab, var(--accent) 28%, transparent) 50%,
+    transparent 100%
+  );
+  animation: scanline 2.4s cubic-bezier(0.32, 0.72, 0, 1) infinite;
+}
+
+@utility cam-overlay {
+  background: radial-gradient(
+    38% 34% at 63% 47%,
+    oklch(0.65 0.22 18) 0%,
+    oklch(0.78 0.16 70) 22%,
+    color-mix(in oklab, oklch(0.78 0.16 70) 55%, transparent) 40%,
+    transparent 66%
+  );
+  animation: camfade 900ms ease 0.3s both;
+}
+
+@utility meter-bar {
+  transform-origin: left;
+  animation: meterfill 1000ms cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+@utility panel-card {
+  border-radius: var(--radius-xl);
+  background-color: color-mix(in oklab, white 3.5%, transparent);
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--line) 60%, transparent);
+}

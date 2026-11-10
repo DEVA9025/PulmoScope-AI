@@ -1,0 +1,21 @@
+Test accuracy: 0.8964
+
+Class order: NORMAL, PNEUMONIA, TUBERCULOSIS, COVID19
+
+Classification report:
+              precision    recall  f1-score   support
+
+      NORMAL     0.9079    0.5897    0.7150       234
+   PNEUMONIA     0.7760    0.9769    0.8649       390
+TUBERCULOSIS     0.9804    0.9524    0.9662       105
+     COVID19     0.9904    0.9607    0.9753       535
+
+    accuracy                         0.8964      1264
+   macro avg     0.9137    0.8699    0.8804      1264
+weighted avg     0.9081    0.8964    0.8923      1264
+
+Confusion matrix:
+[[138  96   0   0]
+ [  9 381   0   0]
+ [  0   0 100   5]
+ [  5  14   2 514]]

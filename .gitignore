@@ -1,0 +1,52 @@
+# Environment variables & secrets (NEVER commit credentials)
+.env
+.env.*
+!.env.example
+
+# Python virtual environment
+venv/
+env/
+.venv/
+ENV/
+
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pytest_cache/
+
+# Datasets (Too large for GitHub)
+dataset/
+dataset_backup/
+dataset_multiclass/
+*.zip
+*.tar.gz
+
+# Model weight files (Large binary files)
+*.keras
+*.h5
+*.hdf5
+*.pt
+*.pth
+*.onnx
+
+# Local database dumps
+local_db/
+test_db/
+*.sqlite3
+*.db
+
+# Node / Frontend build files
+frontend/node_modules/
+node_modules/
+frontend/dist/
+dist/
+frontend/.output/
+frontend/.wrangler/
+frontend/.tanstack/
+.lovable/
+
+# OS generated files
+Thumbs.db
+.DS_Store
+
